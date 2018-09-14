@@ -31,7 +31,13 @@ func writeError(w http.ResponseWriter, err error) {
 }
 
 func (s *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	log.Printf("%s %s", r.Method, r.URL)
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		writeError(w, err)
+		return
+	}
+	log.Printf("%s %s %q", r.Method, r.URL, body)
+
 	if !strings.HasPrefix(r.URL.Path, "/api") {
 		http.ServeFile(w, r, filepath.Join(cwd, "assets", r.URL.Path))
 		return
@@ -58,11 +64,6 @@ func (s *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		}
 	case "POST":
 		var t todo
-		body, err := ioutil.ReadAll(r.Body)
-		if err != nil {
-			writeError(w, err)
-			return
-		}
 		if err := json.Unmarshal(body, &t); err != nil {
 			writeError(w, err)
 			return
