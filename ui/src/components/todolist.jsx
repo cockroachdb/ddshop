@@ -4,7 +4,6 @@ import Todo from "./todo.jsx";
 class TodoList extends React.Component {
   render() {
     const { todos, onTodoClick, deleteTodo, updateTodo } = this.props;
-    console.log(todos);
     return (
       <section className="main">
         <ul className="todo-list">

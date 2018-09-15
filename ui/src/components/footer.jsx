@@ -1,9 +1,9 @@
 import React from "react";
-import FilterLink from "../containers/filterlink.jsx";
+// import FilterLink from "../containers/filterlink.jsx";
 
-const Footer = () => (
+const Footer = ({ count }) => (
   <footer className="footer">
-    <span className="todo-count">{5} items left</span>
+    <span className="todo-count">{count} {count === 1 ? "item" : "items"} left</span>
     <ul className="filters">
       <li>
         <a href="#">All</a>
