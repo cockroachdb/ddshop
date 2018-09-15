@@ -49,9 +49,8 @@ var config = {
     debug: !production,
     devServer: {
         proxy: {
-          '/api/**': {
-            // take advantage of docker-compose linking containers - server is accessible with hostname server
-            target: 'http://localhost:3001',
+          '/api**': {
+            target: 'http://localhost:26256',
             secure: false
           }
         },
