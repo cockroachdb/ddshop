@@ -34,10 +34,12 @@ func run(args []string) error {
 	flagSet.BoolVar(&usePostgres, "postgres", false, "connect to postgres on port 5432")
 	flagSet.BoolVar(&dev, "dev", false, "development mode: serve assets from disk")
 	flagSet.Usage = func() {
-		fmt.Fprintln(os.Stderr, "ddshop: [options] [database-url]...")
+		fmt.Fprintln(os.Stderr, "usage: ddshop [options] [database-url]...")
 		fmt.Fprintln(os.Stderr)
 		fmt.Fprintln(os.Stderr, "Options:")
 		flagSet.PrintDefaults()
+		fmt.Fprintln(os.Stderr)
+		fmt.Fprintln(os.Stderr, "ddshop v1.0.0")
 	}
 	flagSet.Parse(args)
 

@@ -13,14 +13,14 @@ a convenient directory and run the appropriate command for your platform.
 On 64-bit macOS:
 
 ```shell
-$ curl -L https://github.com/cockroachdb/ddshop/releases/download/v0.0.5/ddshop-darwin-amd64 > ddshop
+$ curl -L https://github.com/cockroachdb/ddshop/releases/download/v1.0.0/ddshop-darwin-amd64 > ddshop
 $ chmod +x ddshop
 ```
 
 On 64-bit Linux:
 
 ```shell
-$ curl -L https://github.com/cockroachdb/ddshop/releases/download/v0.0.5/ddshop-linux-amd64 > ddshop
+$ curl -L https://github.com/cockroachdb/ddshop/releases/download/v1.0.0/ddshop-linux-amd64 > ddshop
 $ chmod +x ddshop
 ```
 
@@ -34,7 +34,7 @@ $ cd $(go env GOPATH)/src/github.com/cockroachdb/ddshop
 $ go build
 ```
 
-[ddshop-windows-amd64]: https://github.com/cockroachdb/ddshop/releases/download/v0.0.5/ddshop-windows-amd64.exe
+[ddshop-windows-amd64]: https://github.com/cockroachdb/ddshop/releases/download/v1.0.0/ddshop-windows-amd64.exe
 
 ## Step 2. Install and launch PostgreSQL (optional)
 
