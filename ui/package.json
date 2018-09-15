@@ -35,6 +35,7 @@
     "css-loader": "0.23.1",
     "less": "2.7.1",
     "less-loader": "2.2.3",
+    "prettier": "1.14.2",
     "style-loader": "0.13.1",
     "webpack-dev-server": "1.14.1"
   }
