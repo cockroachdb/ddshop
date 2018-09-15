@@ -1,5 +1,5 @@
 import React from "react";
-import Footer from "./footer.jsx";
+import Footer from "../containers/footer.jsx";
 import AddTodo from "../containers/addtodo.jsx";
 import VisibleTodoList from "../containers/visibletodolist.jsx";
 import { getTodos } from "../actions/index.jsx";
