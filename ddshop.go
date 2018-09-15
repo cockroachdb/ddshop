@@ -8,11 +8,14 @@ import (
 	"errors"
 	"flag"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 
 	_ "github.com/lib/pq"
 )
+
+const listenAddr = ":26256"
 
 func main() {
 	if err := run(os.Args[1:]); err != nil {
@@ -65,6 +68,7 @@ func run(args []string) error {
 		return err
 	}
 
+	log.Printf("ddshop listening on %s", listenAddr)
 	http.Handle("/", &server{db: db})
-	return http.ListenAndServe(":26256", nil)
+	return http.ListenAndServe(listenAddr, nil)
 }
