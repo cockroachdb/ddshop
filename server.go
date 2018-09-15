@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 
 	"github.com/cockroachdb/ddshop/robustdb"
@@ -55,6 +56,15 @@ func (s *server) serveFile(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, filepath.Join(cwd, "assets", r.URL.Path))
 }
 
+func parseTodoID(r *http.Request) (int32, error) {
+	parts := strings.SplitN(r.URL.Path, "/", 3)
+	if n := len(parts); n != 3 {
+		return 0, fmt.Errorf("expected 3 path segments, got %s", n)
+	}
+	id, err := strconv.Atoi(parts[2])
+	return int32(id), err
+}
+
 func (s *server) serveAPI(w http.ResponseWriter, r *http.Request, body []byte) {
 	switch r.Method {
 	case "GET":
@@ -91,6 +101,17 @@ func (s *server) serveAPI(w http.ResponseWriter, r *http.Request, body []byte) {
 			writeError(w, err)
 			return
 		}
+	case "DELETE":
+		id, err := parseTodoID(r)
+		if err != nil {
+			writeError(w, err)
+			return
+		}
+		if err := deleteTodo(s.db, id); err != nil {
+			writeError(w, err)
+			return
+		}
+		fmt.Fprintf(w, "{}")
 	default:
 		http.Error(w, fmt.Sprintf("forbidden HTTP method %s", r.Method), http.StatusMethodNotAllowed)
 	}

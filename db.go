@@ -85,7 +85,7 @@ func listTodos(db *robustdb.DB) ([]todo, error) {
 	return todos, nil
 }
 
-func deleteTodo(db *robustdb.DB, todoID int64) error {
+func deleteTodo(db *robustdb.DB, todoID int32) error {
 	_, err := db.Exec(`DELETE FROM todos WHERE id = $1`, todoID)
 	return err
 }
