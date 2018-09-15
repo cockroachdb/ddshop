@@ -33,14 +33,16 @@ const todos = (state = [], action) => {
       return state.filter(function(item) {
         return item.id != action.id;
       });
-    case "RECEIVE_UPDATE_TODO":
-      var updated_array = state.filter(function(item) {
-        if (item.id == action.todo.id) {
+    case "RECEIVE_UPDATE_TODO": {
+      const newState = state.filter((item) => {
+        if (item.id === action.todo.id) {
           item.completed = action.todo.completed;
         }
         return true;
       });
-      return updated_array;
+      console.log({ newState });
+      return newState;
+    }
     default:
       return state;
   }

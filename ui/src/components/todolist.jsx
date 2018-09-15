@@ -4,6 +4,7 @@ import Todo from "./todo.jsx";
 class TodoList extends React.Component {
   render() {
     const { todos, onTodoClick, deleteTodo, updateTodo } = this.props;
+    console.log(todos);
     return (
       <section className="main">
         <ul className="todo-list">
@@ -13,7 +14,7 @@ class TodoList extends React.Component {
               todo={todo}
               onClick={() => onTodoClick(todo.id)}
               deleteTodo={() => deleteTodo(todo.id)}
-              updateTodo={() => updateTodo(todo)}
+              updateTodo={updateTodo}
             />
           ))}
         </ul>
