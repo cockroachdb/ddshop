@@ -9,8 +9,10 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"math/rand"
 	"net/http"
 	"os"
+	"time"
 
 	_ "github.com/lib/pq"
 )
@@ -67,6 +69,8 @@ func run(args []string) error {
 	if err := bootstrapDB(db); err != nil {
 		return err
 	}
+
+	rand.Seed(time.Now().UnixNano())
 
 	log.Printf("ddshop listening on %s", listenAddr)
 	http.Handle("/", &server{db: db})

@@ -106,7 +106,7 @@ var app = app || {};
 		// persisting it to *localStorage*.
 		createOnEnter: function (e) {
 			if (e.which === ENTER_KEY && this.$input.val().trim()) {
-				app.todos.create(this.newAttributes());
+				app.todos.create(this.newAttributes(), { wait: true, error: console.log });
 				this.$input.val('');
 			}
 		},
