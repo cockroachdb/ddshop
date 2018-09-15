@@ -7,7 +7,7 @@ deploy:
   file:
     - ddshop-linux-amd64
     - ddshop-darwin-amd64
-    - ddshop-windows-amd64
+    - ddshop-windows-amd64.exe
   skip_cleanup: true
   on:
     repo: cockroachdb/ddshop
