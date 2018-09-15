@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"math/rand"
 	"time"
 
@@ -39,19 +40,30 @@ type todo struct {
 	Completed bool      `json:"completed"`
 }
 
-func upsertTodo(db *robustdb.DB, t todo) error {
+func upsertTodo(db *robustdb.DB, t *todo) error {
 	if t.ID == 0 {
 		t.ID = rand.Int31()
+		t.CreatedAt = time.Now()
 	}
-	_, err := db.Exec(
+	rows, err := db.Query(
 		`INSERT INTO todos (id, title, created_at, completed)
 		VALUES ($1, $2, $3, $4)
 		ON CONFLICT (id) DO UPDATE SET
 			title = excluded.title,
 			created_at = excluded.created_at,
-			completed = excluded.completed`,
+			completed = excluded.completed
+		RETURNING id`,
 		t.ID, t.Title, t.CreatedAt, t.Completed)
-	return err
+	if err != nil {
+		return err
+	}
+	if !rows.Next() {
+		return errors.New("upsert query returned no rows")
+	}
+	if err := rows.Scan(&t.ID); err != nil {
+		return err
+	}
+	return nil
 }
 
 func listTodos(db *robustdb.DB) ([]todo, error) {

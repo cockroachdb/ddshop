@@ -92,7 +92,7 @@ var app = app || {};
 			}
 
 			if (trimmedValue) {
-				this.model.save({ title: trimmedValue },{patch:true});
+				this.model.save({ title: trimmedValue },{ wait: true });
 
 				if (value !== trimmedValue) {
 					// Model values changes consisting of whitespaces only are
@@ -128,7 +128,7 @@ var app = app || {};
 
 		// Remove the item, destroy the model from *localStorage* and delete its view.
 		clear: function () {
-			this.model.destroy();
+			this.model.destroy({ wait: true });
 		}
 	});
 })(jQuery);

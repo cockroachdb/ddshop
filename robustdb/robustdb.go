@@ -1,4 +1,4 @@
-// Package robustdb implements a database client that is robust to failures.
+// Package robustdb implements a database client that can tolerate failures.
 package robustdb
 
 import "database/sql"

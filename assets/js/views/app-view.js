@@ -98,7 +98,6 @@ var app = app || {};
 		newAttributes: function () {
 			return {
 				title: this.$input.val().trim(),
-				order: app.todos.nextOrder(),
 				completed: false
 			};
 		},
