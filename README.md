@@ -202,3 +202,13 @@ Distributed databases provide you with all the flexibility and power of standard
 SQL databases while being fault-tolerant and horizontally scalable.
 
 [cockroachdb-install]: https://www.cockroachlabs.com/docs/stable/install-cockroachdb.html
+
+## Credits and License
+
+The Go server is entirely original code but its API is compatible with the
+[Todo-Backend] specification. The client application is derived from
+[go-react-todo]. All code is available under the GPLv2; see [LICENSE] for details.
+
+[Todo-Backend]: https://todobackend.com
+[go-react-todo]: https://github.com/xtrinch/go-react-todo
+[LICENSE]: ./LICENSE
