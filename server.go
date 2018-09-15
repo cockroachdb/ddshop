@@ -7,7 +7,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"path/filepath"
 	"strconv"
 	"strings"
 
@@ -35,8 +34,10 @@ func newServer(db *robustdb.DB, dev bool) *server {
 		db: db,
 	}
 	if dev {
+		log.Printf("using assets on disk")
 		s.fileServer = http.FileServer(http.Dir("assets"))
 	} else {
+		log.Printf("using assets embedded in the binary")
 		s.fileServer = http.FileServer(&assetfs.AssetFS{
 			Asset:     Asset,
 			AssetDir:  AssetDir,
@@ -73,7 +74,7 @@ func (s *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *server) serveFile(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, filepath.Join(cwd, "assets", r.URL.Path))
+	s.fileServer.ServeHTTP(w, r)
 }
 
 func parseTodoID(r *http.Request) (int32, error) {

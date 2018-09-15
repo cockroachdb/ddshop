@@ -371,18 +371,18 @@ func AssetNames() []string {
 
 // _bindata is a table, holding each asset generator, mapped to its name.
 var _bindata = map[string]func() (*asset, error){
-	"css/chooser.css": cssChooserCss,
-	"js/collections/todos.js": jsCollectionsTodosJs,
-	"js/models/todo.js": jsModelsTodoJs,
-	"js/routers/router.js": jsRoutersRouterJs,
-	"js/vendor/backbone.js": jsVendorBackboneJs,
-	"js/vendor/jquery.js": jsVendorJqueryJs,
+	"css/chooser.css":             cssChooserCss,
+	"js/collections/todos.js":     jsCollectionsTodosJs,
+	"js/models/todo.js":           jsModelsTodoJs,
+	"js/routers/router.js":        jsRoutersRouterJs,
+	"js/vendor/backbone.js":       jsVendorBackboneJs,
+	"js/vendor/jquery.js":         jsVendorJqueryJs,
 	"js/vendor/todomvc-common.js": jsVendorTodomvcCommonJs,
-	"js/vendor/underscore.js": jsVendorUnderscoreJs,
-	"js/views/app-view.js": jsViewsAppViewJs,
-	"js/views/todo-view.js": jsViewsTodoViewJs,
-	"js/app.js": jsAppJs,
-	"index.html": indexHtml,
+	"js/vendor/underscore.js":     jsVendorUnderscoreJs,
+	"js/views/app-view.js":        jsViewsAppViewJs,
+	"js/views/todo-view.js":       jsViewsTodoViewJs,
+	"js/app.js":                   jsAppJs,
+	"index.html":                  indexHtml,
 }
 
 // AssetDir returns the file names below a certain
@@ -424,6 +424,7 @@ type bintree struct {
 	Func     func() (*asset, error)
 	Children map[string]*bintree
 }
+
 var _bintree = &bintree{nil, map[string]*bintree{
 	"css": &bintree{nil, map[string]*bintree{
 		"chooser.css": &bintree{cssChooserCss, map[string]*bintree{}},
@@ -441,13 +442,13 @@ var _bintree = &bintree{nil, map[string]*bintree{
 			"router.js": &bintree{jsRoutersRouterJs, map[string]*bintree{}},
 		}},
 		"vendor": &bintree{nil, map[string]*bintree{
-			"backbone.js": &bintree{jsVendorBackboneJs, map[string]*bintree{}},
-			"jquery.js": &bintree{jsVendorJqueryJs, map[string]*bintree{}},
+			"backbone.js":       &bintree{jsVendorBackboneJs, map[string]*bintree{}},
+			"jquery.js":         &bintree{jsVendorJqueryJs, map[string]*bintree{}},
 			"todomvc-common.js": &bintree{jsVendorTodomvcCommonJs, map[string]*bintree{}},
-			"underscore.js": &bintree{jsVendorUnderscoreJs, map[string]*bintree{}},
+			"underscore.js":     &bintree{jsVendorUnderscoreJs, map[string]*bintree{}},
 		}},
 		"views": &bintree{nil, map[string]*bintree{
-			"app-view.js": &bintree{jsViewsAppViewJs, map[string]*bintree{}},
+			"app-view.js":  &bintree{jsViewsAppViewJs, map[string]*bintree{}},
 			"todo-view.js": &bintree{jsViewsTodoViewJs, map[string]*bintree{}},
 		}},
 	}},
@@ -499,4 +500,3 @@ func _filePath(dir, name string) string {
 	cannonicalName := strings.Replace(name, "\\", "/", -1)
 	return filepath.Join(append([]string{dir}, strings.Split(cannonicalName, "/")...)...)
 }
-
