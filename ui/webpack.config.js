@@ -18,6 +18,7 @@ var config = {
   publicPath: "/",
   plugins: [
     new CopyWebpackPlugin([{ from: "./index.html" }]),
+    new CopyWebpackPlugin([{ from: "./node_modules/todomvc-app-css/index.css" }]),
     new CleanWebpackPlugin([BUILD_DIR])
   ],
   target: "web",
