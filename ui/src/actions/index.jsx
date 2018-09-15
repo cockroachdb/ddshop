@@ -4,7 +4,7 @@ let nextTodoId = 0
 export const addTodo = (text) => {
     return dispatch => {
       dispatch(sendTodo()),
-      fetch(`/api/v1/todos/`, {
+      fetch(`/api`, {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json'
@@ -34,7 +34,7 @@ export const receiveTodo = (json) => {
 export const deleteTodo = (id) => {
     return dispatch => {
         dispatch(sendTodo()),
-        fetch(`/api/v1/todos/`+id, {
+        fetch(`/api/${id}`, {
             method: 'DELETE'
         }).then(dispatch(receiveDeleteTodo(id)));
     }
@@ -50,7 +50,7 @@ export const receiveDeleteTodo = (id) => {
 export const updateTodo = (todo) => {
     return dispatch => {
         dispatch(toggleTodo(todo)),
-        fetch(`/api/v1/todos/`+todo.id, {
+        fetch(`/api/${todo.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -90,7 +90,7 @@ export const receiveTodos = (json) => {
 export const getTodos = () => {
     return dispatch => {
         dispatch(requestTodos()),
-        fetch(`/api/v1/todos/`)
+        fetch(`/api`)
             .then(req => req.json())
             .then(json => dispatch(receiveTodos(json)));
     }
