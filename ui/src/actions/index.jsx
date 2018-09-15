@@ -1,112 +1,111 @@
-import fetch from 'isomorphic-fetch';
+import fetch from "isomorphic-fetch";
 
-let nextTodoId = 0
-export const addTodo = (text) => {
-    return dispatch => {
-      dispatch(sendTodo()),
+let nextTodoId = 0;
+export const addTodo = text => {
+  return dispatch => {
+    dispatch(sendTodo()),
       fetch(`/api`, {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-              title: text
-          })
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          title: text
+        })
       })
-          .then(req => req.json())
-          .then(json => dispatch(receiveTodo(json)));
-    }
-}
+        .then(req => req.json())
+        .then(json => dispatch(receiveTodo(json)));
+  };
+};
 
 export const sendTodo = () => {
-    return {
-        type: 'SEND_TODO'
-    }
-}
+  return {
+    type: "SEND_TODO"
+  };
+};
 
-export const receiveTodo = (json) => {
-    return {
-        type: 'RECEIVE_TODO',
-        todo: json
-    }
-}
+export const receiveTodo = json => {
+  return {
+    type: "RECEIVE_TODO",
+    todo: json
+  };
+};
 
-export const deleteTodo = (id) => {
-    return dispatch => {
-        dispatch(sendTodo()),
-        fetch(`/api/${id}`, {
-            method: 'DELETE'
-        }).then(dispatch(receiveDeleteTodo(id)));
-    }
-}
+export const deleteTodo = id => {
+  return dispatch => {
+    dispatch(sendTodo()),
+      fetch(`/api/${id}`, {
+        method: "DELETE"
+      }).then(dispatch(receiveDeleteTodo(id)));
+  };
+};
 
-export const receiveDeleteTodo = (id) => {
-    return {
-        type: 'RECEIVE_DELETE_TODO',
-        id: id
-    }
-}
+export const receiveDeleteTodo = id => {
+  return {
+    type: "RECEIVE_DELETE_TODO",
+    id: id
+  };
+};
 
-export const updateTodo = (todo) => {
-    return dispatch => {
-        dispatch(toggleTodo(todo)),
-        fetch(`/api/${todo.id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(todo)
-        }).then(dispatch(receiveUpdateTodo(todo)));
-    }
-}
+export const updateTodo = todo => {
+  return dispatch => {
+    dispatch(toggleTodo(todo)),
+      fetch(`/api/${todo.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(todo)
+      }).then(dispatch(receiveUpdateTodo(todo)));
+  };
+};
 
-export const receiveUpdateTodo = (todo) => {
-    return {
-        type: 'RECEIVE_UPDATE_TODO',
-        todo: todo
-    }
-}
+export const receiveUpdateTodo = todo => {
+  return {
+    type: "RECEIVE_UPDATE_TODO",
+    todo: todo
+  };
+};
 
 export const clearTodo = () => {
-    return {
-        type: 'CLEAR_TODO'
-    }
-}
+  return {
+    type: "CLEAR_TODO"
+  };
+};
 
 export const requestTodos = () => {
-    return {
-        type: 'REQUEST_TODOS'
-    }
-}
+  return {
+    type: "REQUEST_TODOS"
+  };
+};
 
-export const receiveTodos = (json) => {
-    return {
-        type: 'RECEIVE_TODOS',
-        todos: json,
-        updatedAt: Date.now()
-    }
-}
+export const receiveTodos = json => {
+  return {
+    type: "RECEIVE_TODOS",
+    todos: json,
+    updatedAt: Date.now()
+  };
+};
 
 export const getTodos = () => {
-    return dispatch => {
-        dispatch(requestTodos()),
-        fetch(`/api`)
-            .then(req => req.json())
-            .then(json => dispatch(receiveTodos(json)));
-    }
-}
+  return dispatch => {
+    dispatch(requestTodos()),
+      fetch(`/api`)
+        .then(req => req.json())
+        .then(json => dispatch(receiveTodos(json)));
+  };
+};
 
-
-export const setVisibilityFilter = (filter) => {
+export const setVisibilityFilter = filter => {
   return {
-    type: 'SET_VISIBILITY_FILTER',
+    type: "SET_VISIBILITY_FILTER",
     filter
-  }
-}
+  };
+};
 
-export const toggleTodo = (todo) => {
+export const toggleTodo = todo => {
   return {
-    type: 'TOGGLE_TODO',
+    type: "TOGGLE_TODO",
     todo: todo
-  }
-}
+  };
+};
