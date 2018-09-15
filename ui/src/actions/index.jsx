@@ -33,7 +33,9 @@ export const deleteTodo = id => {
     dispatch(sendTodo());
     fetch(`/api/${id}`, {
       method: "DELETE"
-    }).then(dispatch(receiveDeleteTodo(id)));
+    }).then(() => {
+      dispatch(receiveDeleteTodo(id));
+    });
   };
 };
 
@@ -53,7 +55,9 @@ export const updateTodo = todo => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(todo)
-    }).then(dispatch(receiveUpdateTodo(todo)));
+    }).then(() => {
+      dispatch(receiveUpdateTodo(todo));
+    });
   };
 };
 

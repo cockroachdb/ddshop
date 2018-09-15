@@ -6,13 +6,15 @@ const todo = (state = {}, action) => {
         title: action.text,
         completed: false
       };
-    case "TOGGLE_TODO":
-      if (state.id !== action.todo.id) {
-        return state;
-      }
-      return Object.assign({}, state, {
-        completed: !state.completed
-      });
+    // Commented out so that the UI doesn't show a change
+    // until it's been acknowledged by the server.
+    // case "TOGGLE_TODO":
+    //   if (state.id !== action.todo.id) {
+    //     return state;
+    //   }
+    //   return Object.assign({}, state, {
+    //     completed: !state.completed
+    //   });
 
     default:
       return state;
@@ -23,8 +25,11 @@ const todos = (state = [], action) => {
   switch (action.type) {
     case "ADD_TODO":
       return [...state, todo(undefined, action)];
-    case "TOGGLE_TODO":
-      return state.map(t => todo(t, action));
+    // Commented out so that the UI doesn't show a change
+    // until it's been acknowledged by the server.
+    // case "TOGGLE_TODO":
+    //   console.log("toggle todo");
+    //   return state.map(t => todo(t, action));
     case "RECEIVE_TODO":
       return [...state, action.todo];
     case "RECEIVE_TODOS":
