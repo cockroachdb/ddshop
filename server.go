@@ -14,7 +14,7 @@ import (
 	"github.com/elazarl/go-bindata-assetfs"
 )
 
-//go:generate go-bindata -prefix assets assets/css assets/js/collections assets/js/models assets/js/routers assets/js/vendor assets/js/views assets/js assets
+//go:generate go-bindata -prefix assets assets/css assets/css/vendor assets/js/collections assets/js/models assets/js/routers assets/js/vendor assets/js/views assets/js assets
 
 var cwd = func() string {
 	cwd, err := os.Getwd()
