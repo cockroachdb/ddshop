@@ -7,7 +7,8 @@ import App from "./components/app.jsx";
 import thunk from "redux-thunk";
 
 // allows us to return promises from actions
-let store = compose(applyMiddleware(thunk))(createStore)(todoApp);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+let store = composeEnhancers(applyMiddleware(thunk))(createStore)(todoApp);
 
 render(
   <Provider store={store}>
