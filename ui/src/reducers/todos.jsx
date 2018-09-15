@@ -40,7 +40,6 @@ const todos = (state = [], action) => {
         }
         return true;
       });
-      console.log({ newState });
       return newState;
     }
     default:

@@ -17,48 +17,10 @@ const Todo = ({ onClick, deleteTodo, updateTodo, todo }) => (
       <label>{todo.title}</label>
       <button
         className="destroy"
-        onClick={evt => {
-          evt.preventDefault();
+        onClick={() => {
           deleteTodo();
         }}
       />
-
-      {/* <span
-        style={{
-          textDecoration: todo.completed? 'line-through': 'none'
-        }}
-        onClick={onClick}
-      >
-        {todo.title}
-      </span>
-
-      <a
-        href="#"
-        style={{
-          marginLeft: "10px",
-          textDecoration: todo.completed? 'line-through': 'none'
-        }}
-        onClick={e => {
-          e.preventDefault()
-          todo.completed = !todo.completed
-          updateTodo()
-        }}
-      >
-          (complete)
-      </a>
-
-      <a
-        href="#"
-        style={{
-          marginLeft: "10px"
-        }}
-        onClick={e => {
-            e.preventDefault()
-            deleteTodo()
-        }}
-      >
-        (delete)
-      </a> */}
     </div>
   </li>
 );
