@@ -14,7 +14,7 @@ import (
 	"github.com/elazarl/go-bindata-assetfs"
 )
 
-//go:generate go-bindata -prefix assets assets/css assets/css/vendor assets/js/collections assets/js/models assets/js/routers assets/js/vendor assets/js/views assets/js assets
+//go:generate go-bindata -prefix ui/build ui/build
 
 var cwd = func() string {
 	cwd, err := os.Getwd()
@@ -35,7 +35,7 @@ func newServer(db *robustdb.DB, dev bool) *server {
 	}
 	if dev {
 		log.Printf("using assets on disk")
-		s.fileServer = http.FileServer(http.Dir("assets"))
+		s.fileServer = http.FileServer(http.Dir("ui/build"))
 	} else {
 		log.Printf("using assets embedded in the binary")
 		s.fileServer = http.FileServer(&assetfs.AssetFS{
