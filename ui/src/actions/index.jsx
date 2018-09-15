@@ -1,20 +1,17 @@
-import fetch from "isomorphic-fetch";
-
-let nextTodoId = 0;
 export const addTodo = text => {
   return dispatch => {
-    dispatch(sendTodo()),
-      fetch(`/api`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          title: text
-        })
+    dispatch(sendTodo());
+    fetch(`/api`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        title: text
       })
-        .then(req => req.json())
-        .then(json => dispatch(receiveTodo(json)));
+    })
+      .then(req => req.json())
+      .then(json => dispatch(receiveTodo(json)));
   };
 };
 
@@ -33,10 +30,10 @@ export const receiveTodo = json => {
 
 export const deleteTodo = id => {
   return dispatch => {
-    dispatch(sendTodo()),
-      fetch(`/api/${id}`, {
-        method: "DELETE"
-      }).then(dispatch(receiveDeleteTodo(id)));
+    dispatch(sendTodo());
+    fetch(`/api/${id}`, {
+      method: "DELETE"
+    }).then(dispatch(receiveDeleteTodo(id)));
   };
 };
 
@@ -49,14 +46,14 @@ export const receiveDeleteTodo = id => {
 
 export const updateTodo = todo => {
   return dispatch => {
-    dispatch(toggleTodo(todo)),
-      fetch(`/api/${todo.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(todo)
-      }).then(dispatch(receiveUpdateTodo(todo)));
+    dispatch(toggleTodo(todo));
+    fetch(`/api/${todo.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(todo)
+    }).then(dispatch(receiveUpdateTodo(todo)));
   };
 };
 
@@ -89,10 +86,10 @@ export const receiveTodos = json => {
 
 export const getTodos = () => {
   return dispatch => {
-    dispatch(requestTodos()),
-      fetch(`/api`)
-        .then(req => req.json())
-        .then(json => dispatch(receiveTodos(json)));
+    dispatch(requestTodos());
+    fetch(`/api`)
+      .then(req => req.json())
+      .then(json => dispatch(receiveTodos(json)));
   };
 };
 
