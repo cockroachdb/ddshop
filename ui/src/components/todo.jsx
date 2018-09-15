@@ -16,7 +16,7 @@ const Todo = ({ onClick, deleteTodo, updateTodo, todo }) => (
       />
       <label>{todo.title}</label>
       <button
-        className="destroy"
+        className={`destroy ${todo.deleting ? "spin" : ""}`}
         onClick={() => {
           deleteTodo();
         }}

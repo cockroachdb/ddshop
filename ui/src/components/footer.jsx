@@ -4,17 +4,18 @@ import React from "react";
 const Footer = ({ count }) => (
   <footer className="footer">
     <span className="todo-count">{count} {count === 1 ? "item" : "items"} left</span>
-    <ul className="filters">
-      <li>
-        <a href="#">All</a>
-      </li>
-      <li>
-        <a href="#">Active</a>
-      </li>
-      <li>
-        <a href="#">Completed</a>
-      </li>
-    </ul>
+    {/*TODO(vilterp): make these work*/}
+    {/*<ul className="filters">*/}
+      {/*<li>*/}
+        {/*<a href="#">All</a>*/}
+      {/*</li>*/}
+      {/*<li>*/}
+        {/*<a href="#">Active</a>*/}
+      {/*</li>*/}
+      {/*<li>*/}
+        {/*<a href="#">Completed</a>*/}
+      {/*</li>*/}
+    {/*</ul>*/}
   </footer>
 );
 
