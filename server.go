@@ -59,10 +59,19 @@ func (s *server) serveFile(w http.ResponseWriter, r *http.Request) {
 func parseTodoID(r *http.Request) (int32, error) {
 	parts := strings.SplitN(r.URL.Path, "/", 3)
 	if n := len(parts); n != 3 {
-		return 0, fmt.Errorf("expected 3 path segments, got %s", n)
+		return 0, fmt.Errorf("expected 3 path segments, got %d", n)
 	}
 	id, err := strconv.Atoi(parts[2])
 	return int32(id), err
+}
+
+func writeJSON(w http.ResponseWriter, data interface{}) error {
+	bytes, err := json.Marshal(data)
+	if err != nil {
+		return err
+	}
+	_, err = w.Write(bytes)
+	return err
 }
 
 func (s *server) serveAPI(w http.ResponseWriter, r *http.Request, body []byte) {
@@ -73,12 +82,7 @@ func (s *server) serveAPI(w http.ResponseWriter, r *http.Request, body []byte) {
 			writeError(w, err)
 			return
 		}
-		data, err := json.Marshal(todos)
-		if err != nil {
-			writeError(w, err)
-			return
-		}
-		if _, err := w.Write(data); err != nil {
+		if err := writeJSON(w, todos); err != nil {
 			writeError(w, err)
 			return
 		}
@@ -92,12 +96,7 @@ func (s *server) serveAPI(w http.ResponseWriter, r *http.Request, body []byte) {
 			writeError(w, err)
 			return
 		}
-		data, err := json.Marshal(&t)
-		if err != nil {
-			writeError(w, err)
-			return
-		}
-		if _, err := w.Write(data); err != nil {
+		if err := writeJSON(w, &t); err != nil {
 			writeError(w, err)
 			return
 		}
@@ -111,7 +110,10 @@ func (s *server) serveAPI(w http.ResponseWriter, r *http.Request, body []byte) {
 			writeError(w, err)
 			return
 		}
-		fmt.Fprintf(w, "{}")
+		if err := writeJSON(w, &todo{}); err != nil {
+			writeError(w, err)
+			return
+		}
 	default:
 		http.Error(w, fmt.Sprintf("forbidden HTTP method %s", r.Method), http.StatusMethodNotAllowed)
 	}
