@@ -1,16 +1,17 @@
 import React, { PropTypes } from "react";
 
 const Todo = ({ onClick, deleteTodo, updateTodo, todo }) => (
-  <li>
+  <li className={todo.completed ? "completed" : ""}>
     <div className="view">
       <input
         className="toggle"
         type="checkbox"
         checked={todo.completed}
-        onClick={evt => {
-          evt.preventDefault();
-          todo.completed = !todo.completed;
-          updateTodo();
+        onChange={() => {
+          const newTodo = Object.assign({}, todo, {
+            completed: !todo.completed,
+          });
+          updateTodo(newTodo);
         }}
       />
       <label>{todo.title}</label>
