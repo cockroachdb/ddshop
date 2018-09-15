@@ -102,8 +102,7 @@ deployment, you'd run each node on a separate server for fault tolerance.
         --store=node1 \
         --host=localhost \
         --port=26257 \
-        --http-port=8080 \
-        --join=localhost:26257,localhost:26258,localhost:26259
+        --http-port=8080
     ```
 
 2. In another terminal, start node 2:
