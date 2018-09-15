@@ -28,23 +28,40 @@ export const receiveTodo = json => {
   };
 };
 
-export const deleteTodo = id => {
+export const deleteTodo = (id) => {
   return dispatch => {
-    dispatch(sendTodo());
+    dispatch(attemptDeleteTodo(id));
     fetch(`/api/${id}`, {
       method: "DELETE"
     }).then(() => {
       dispatch(receiveDeleteTodo(id));
+    }).catch((err) => {
+      dispatch(deleteTodoErr(id, err));
     });
   };
 };
 
-export const receiveDeleteTodo = id => {
+export const attemptDeleteTodo = (todoID) => {
+  return {
+    type: "ATTEMPT_DELETE_TODO",
+    todoID,
+  }
+}
+
+export const receiveDeleteTodo = (id) => {
   return {
     type: "RECEIVE_DELETE_TODO",
     id: id
   };
 };
+
+export const deleteTodoErr = (todoID, err) => {
+  return {
+    type: "DELETE_TODO_ERR",
+    todoID,
+    err,
+  };
+}
 
 export const updateTodo = todo => {
   return dispatch => {

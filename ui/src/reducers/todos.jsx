@@ -30,6 +30,18 @@ const todos = (state = [], action) => {
     // case "TOGGLE_TODO":
     //   console.log("toggle todo");
     //   return state.map(t => todo(t, action));
+    case "ATTEMPT_DELETE_TODO":
+      return state.map((todo) => (
+        todo.id === action.todoID
+          ? Object.assign({}, todo, { deleting: true })
+          : todo
+      ));
+    case "DELETE_TODO_ERR":
+      return state.map((todo) => (
+        todo.id === action.todoID
+          ? Object.assign({}, todo, { deleting: false })
+          : todo
+      ));
     case "RECEIVE_TODO":
       return [...state, action.todo];
     case "RECEIVE_TODOS":
