@@ -1,1 +1,13 @@
 language: go
+deploy:
+  provider: releases
+  api_key:
+    secure: Qsmiyvwug0PnwCFwnlkdNGHoSPGHkr2dqmnjUkajebvhaPAZ0XR7gmwkhG53DKecCws0BXKoPO8MyHudzxPwFwHIyHJE6yqcqSho533WY/c4LWAnvhR2jABZLBpr+KRHYoJ3ppfB16543uIkHX6+y12sXjLIFqtwmgRIUwjeMHzErbrB/KAZuiKOq6PUR1+PZ4gKE82Fby0vXZlWv5yyx2JJlNXh4S73gcScDOJbPkUb/km9+C4QBjuBmeG3KD1fZiTNnetLsKBQa8Wcxbx9Oqecb1TcrzqNZlpke0UUlKVHsBUYqRC0bZW1/bavxHCPd2GrthXGf53NBltjM3BO9kaRexvPfPvwg20ozUHQgCUwrgVlEotVUzZfUeZOAcj63sq/rbRZusOc0rVkhdvxMg04fZfSVKhJsbHq+tZckbIHc+ek5IbAShLbo662kWCDqZ4h8U8fY59HvG8eb0ai7GBsvwKcqR58zOT1Rqop7H0e/ABlNgTs/guN67LSj8/ci+3Qc1KC/IcWUTGBhHX7buD93yJcCrhY2VfZ6/Tcg3xXyt0A7dJcKBu3GznPRg6jTlDBJE+Sl+kEntVkdw7zjk7D15RycowTIzdJ+mq9+/bHTnvZM68pLxscrb1tWVJp8KATvlUlu4JUoF4FuJR+kqD3i1b4Kvik1bwEpkjnvUg=
+  file:
+    - ddshop-linux-amd64
+    - ddshop-darwin-amd64
+    - ddshop-windows-amd64
+  skip_cleanup: true
+  on:
+    repo: cockroachdb/ddshop
+    tags: true
