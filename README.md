@@ -97,7 +97,7 @@ deployment, you'd run each node on a separate server for fault tolerance.
 1. In a new terminal, start node 1:
 
     ```shell
-    $ ./cockroach start \
+    $ cockroach start \
         --insecure \
         --store=node1 \
         --host=localhost \
@@ -108,7 +108,7 @@ deployment, you'd run each node on a separate server for fault tolerance.
 2. In another terminal, start node 2:
 
     ```shell
-    $ ./cockroach start \
+    $ cockroach start \
         --insecure \
         --store=node2 \
         --host=localhost \
@@ -120,7 +120,7 @@ deployment, you'd run each node on a separate server for fault tolerance.
 3. In another terminal, start node 3:
 
     ```shell
-    $ ./cockroach start \
+    $ cockroach start \
         --insecure \
         --store=node3 \
         --host=localhost \
@@ -155,7 +155,7 @@ Simulate a failure of the machine running node 3 by quitting that CockroachDB
 instance:
 
 ```shell
-$ ./cockroach quit --insecure --port=26258
+$ cockroach quit --insecure --port=26258
 ```
 
 You'll notice that the web UI has detected this failure and displays that one
@@ -170,7 +170,7 @@ Now simulate a failure of the machine running node 2 by quitting that
 CockroachDB instance:
 
 ```shell
-$ ./cockroach quit --insecure --port=26258
+$ cockroach quit --insecure --port=26258
 ```
 
 This time, the `ddshop` todo list will become unavailable. CockroachDB can
@@ -185,7 +185,7 @@ Simulate a recovery of the machine running node 2 by restarting that CockroachDB
 instance:
 
 ```shell
-$ ./cockroach start \
+$ cockroach start \
     --insecure \
     --store=node2 \
     --host=localhost \
