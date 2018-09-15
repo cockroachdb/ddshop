@@ -27,11 +27,12 @@ func main() {
 }
 
 func run(args []string) error {
-	var useCockroach, usePostgres bool
+	var useCockroach, usePostgres, dev bool
 	flagSet := flag.NewFlagSet("ddshop", flag.ExitOnError)
 	flagSet.BoolVar(&useCockroach, "cockroach", false,
 		"connect to cockroach on ports 26257, 26258, and 26259")
 	flagSet.BoolVar(&usePostgres, "postgres", false, "connect to postgres on port 5432")
+	flagSet.BoolVar(&dev, "dev", false, "development mode: serve assets from disk")
 	flagSet.Usage = func() {
 		fmt.Fprintln(os.Stderr, "ddshop: [options] [database-url]...")
 		fmt.Fprintln(os.Stderr)
@@ -73,6 +74,6 @@ func run(args []string) error {
 	rand.Seed(time.Now().UnixNano())
 
 	log.Printf("ddshop listening on %s", listenAddr)
-	http.Handle("/", &server{db: db})
+	http.Handle("/", newServer(db, dev))
 	return http.ListenAndServe(listenAddr, nil)
 }

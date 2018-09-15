@@ -12,7 +12,10 @@ import (
 	"strings"
 
 	"github.com/cockroachdb/ddshop/robustdb"
+	"github.com/elazarl/go-bindata-assetfs"
 )
+
+//go:generate go-bindata -prefix assets assets/css assets/js/collections assets/js/models assets/js/routers assets/js/vendor assets/js/views assets/js assets
 
 var cwd = func() string {
 	cwd, err := os.Getwd()
@@ -23,7 +26,24 @@ var cwd = func() string {
 }()
 
 type server struct {
-	db *robustdb.DB
+	db         *robustdb.DB
+	fileServer http.Handler
+}
+
+func newServer(db *robustdb.DB, dev bool) *server {
+	s := &server{
+		db: db,
+	}
+	if dev {
+		s.fileServer = http.FileServer(http.Dir("assets"))
+	} else {
+		s.fileServer = http.FileServer(&assetfs.AssetFS{
+			Asset:     Asset,
+			AssetDir:  AssetDir,
+			AssetInfo: AssetInfo,
+		})
+	}
+	return s
 }
 
 func writeError(w http.ResponseWriter, err error) {
