@@ -54,9 +54,9 @@ func run(args []string) error {
 	urls := flag.Args()
 	if useCockroach {
 		urls = []string{
-			"postgres://root@:26257?sslmode=disable",
-			"postgres://root@:26258?sslmode=disable",
-			"postgres://root@:26259?sslmode=disable",
+			"postgres://root@:26257/defaultdb?sslmode=disable",
+			"postgres://root@:26258/defaultdb?sslmode=disable",
+			"postgres://root@:26259/defaultdb?sslmode=disable",
 		}
 	} else if usePostgres {
 		urls = []string{"postgres://localhost:5432?sslmode=disable"}
@@ -65,6 +65,13 @@ func run(args []string) error {
 	db, err := connectDB(urls)
 	if err != nil {
 		return err
+	}
+
+	if useCockroach {
+		_, err := db.Exec(`CREATE DATABASE IF NOT EXISTS defaultdb`)
+		if err != nil {
+			return err
+		}
 	}
 
 	if err := bootstrapDB(db); err != nil {
